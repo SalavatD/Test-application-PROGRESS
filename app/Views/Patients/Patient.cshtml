@@ -1,0 +1,46 @@
+@model dynamic
+@{
+    ViewBag.Title = "Информация о пациенте и его посещения";
+    Layout = "_Layout";
+    var patient = Model.Patients.GetPatientInfo(ViewBag.patientId);
+}
+<br>
+<span><b>@ViewBag.Title</b></span>
+<br>
+<br>
+<b>Идентификатор: </b><span>@patient.Id</span>
+<br>
+<b>Фамилия: </b><span>@patient.Lastname</span>
+<br>
+<b>Имя: </b><span>@patient.Firstname</span>
+<br>
+<b>Отчество: </b><span>@patient.Middlename</span>
+<br>
+<b>Дата рождения: </b><span>@patient.Birthdate</span>
+<br>
+<b>Номер телефона: </b><span>@patient.Phone</span>
+<br>
+<br>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Идентификатор посещения</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Код диагноза</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var data in Model.Receptions.GetReceptionsByPatientId(ViewBag.patientId))
+    {
+        <tr>
+            <td>@data.Id</td>
+            <td>@data.Date</td>
+            <td>@data.DiagnosisId</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<form action="/patients/xml" method="get" class="form">
+    <input type="hidden" name="patientId" value="@patient.Id">
+    <button type="submit" class="btn btn-primary">Выгрузить в XML</button>
+</form>

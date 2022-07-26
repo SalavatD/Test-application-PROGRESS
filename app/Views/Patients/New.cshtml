@@ -1,0 +1,35 @@
+@{
+    ViewBag.Title = "Ввод данных о пациенте";
+    Layout = "_Layout";
+}
+<br>
+<span><b>@ViewBag.Title</b></span>
+<br>
+<br>
+<form action="/patients/create" method="post" class="form">
+    <div class="form-group">
+        <label for="id">Идентификатор пациента</label>
+        <input type="text" class="form-control" id="id" name="id" placeholder="1234567890">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Фамилия</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Иванов">
+    </div>
+    <div class="form-group">
+        <label for="firstname">Имя</label>
+        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Иван">
+    </div>
+    <div class="form-group">
+        <label for="middlename">Отчество</label>
+        <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Иванович">
+    </div>
+    <div class="form-group">
+        <label for="birthdate">Дата рождения</label>
+        <input type="date" class="form-control" id="birthdate" name="birthdate">
+    </div>
+    <div class="form-group">
+        <label for="phone">Номер телефона</label>
+        <input type="tel" class="form-control" id="phone" name="phone">
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>

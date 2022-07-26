@@ -1,0 +1,36 @@
+@model app.Models.PatientsModel
+@{
+    ViewBag.Title = "Список пациентов";
+    Layout = "_Layout";
+}
+<br>
+<span><b>@ViewBag.Title</b></span>
+<br>
+<br>
+<table class="table" id="searchable-table">
+    <thead>
+    <tr>
+        <th scope="col">Идентификатор</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Отчество</th>
+        <th scope="col">Дата рождения</th>
+        <th scope="col">Телефон</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var data in Model.GetPatients())
+    {
+        <tr>
+            <td>@data.Id</td>
+            <td>@data.Lastname</td>
+            <td>@data.Firstname</td>
+            <td>@data.Middlename</td>
+            <td>@data.Birthdate</td>
+            <td>@data.Phone</td>
+            <td><a href="/patients/patient?patientId=@data.Id">Информация о пациенте</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

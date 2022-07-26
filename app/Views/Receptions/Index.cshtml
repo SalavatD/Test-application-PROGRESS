@@ -1,0 +1,31 @@
+@model dynamic
+@{
+    ViewBag.Title = "Все посещения";
+    Layout = "_Layout";
+}
+<br>
+<span><b>@ViewBag.Title</b></span>
+<br>
+<br>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Идентификатор посещения</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Код диагноза</th>
+        <th scope="col">Пациент</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var data in Model.Receptions.GetReceptions())
+    {
+        var patient = Model.Patients.GetPatientInfo(@data.PatientId);
+        <tr>
+            <td>@data.Id</td>
+            <td>@data.Date</td>
+            <td>@data.DiagnosisId</td>
+            <td>@patient.Lastname @patient.Firstname @patient.Middlename</td>
+        </tr>
+    }
+    </tbody>
+</table>

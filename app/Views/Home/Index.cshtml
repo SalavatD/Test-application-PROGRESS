@@ -1,0 +1,21 @@
+@model app.Models.PatientsModel
+@{
+    ViewBag.Title = "Главная";
+    Layout = "_Layout";
+}
+<br>
+<span><b>Поиск информации о пациенте и его посещениях</b></span>
+<br>
+<br>
+<form action="/patients/patient" method="get" class="form">
+    <div class="form-group">
+        <input class="form-control" list="patientOptions" id="patient_id" name="patientId" placeholder="Имя пациента или идентификатор">
+        <datalist id="patientOptions">
+            @foreach (var data in Model.GetPatients())
+            {
+                <option label="@data.Id @data.Lastname @data.Firstname @data.Middlename" value="@data.Id"></option>
+            }
+        </datalist>
+    </div>
+    <button type="submit" class="btn btn-primary">Показать</button>
+</form>

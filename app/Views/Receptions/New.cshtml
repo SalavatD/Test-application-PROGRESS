@@ -1,0 +1,40 @@
+@model dynamic
+@{
+    ViewBag.Title = "Ввод данных о посещении";
+    Layout = "_Layout";
+}
+<br>
+<span><b>@ViewBag.Title</b></span>
+<br>
+<br>
+<form action="/receptions/create" method="post" class="form">
+    <div class="form-group">
+        <label for="id">Идентификатор посещения</label>
+        <input type="text" class="form-control" id="id" name="id" placeholder="1234567890">
+    </div>
+    <div class="form-group">
+        <label for="date">Дата посещения</label>
+        <input type="datetime-local" class="form-control" id="date" name="date">
+    </div>
+    <div class="form-group">
+        <label for="diagnosis_id">Код диагноза</label>
+        <input class="form-control" list="diagnosisOptions" id="diagnosis_id" name="diagnosisId" placeholder="Код или название диагноза">
+        <datalist id="diagnosisOptions">
+            @foreach (var data in Model.Diagnoses.GetDiagnoses())
+            {
+                <option label="[@data.Icd10Code] @data.Name" value="@data.Icd10Code"></option>
+            }
+        </datalist>
+    </div>
+    <div class="form-group">
+        <label for="patient_id">Идентификатор пациента</label>
+        <input class="form-control" list="patientOptions" id="patient_id" name="patientId" placeholder="Имя пациента или идентификатор">
+        <datalist id="patientOptions">
+            @foreach (var data in Model.Patients.GetPatients())
+            {
+                <option label="[@data.Id] @data.Lastname @data.Firstname @data.Middlename" value="@data.Id"></option>
+            }
+        </datalist>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
